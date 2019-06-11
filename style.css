@@ -1,0 +1,192 @@
+@import "font-awesome-4.7.0/css/font-awesome.css";
+
+@font-face {
+	font-family: SourceCodePro-Light;
+	src: url(SourceCodePro-Light.otf);
+	font-weight: normal;
+	font-style: normal;
+}
+
+* {
+	font-family: SourceCodePro-Light;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+
+.content {
+	background: url(what-the-hex-dark.png);
+	height: 500px;
+	width: 100%;
+	margin-top: 0;
+}
+
+.photo {
+	width: 300px;
+	height: 300px;
+	border-radius: 50%;
+	display: block;
+	margin-top: 0px;
+	margin-right: 100px;
+	float: right;
+}
+
+.title {
+	color: #eee;
+	font-size: 50px;
+	text-align: center;
+	display: block;
+	padding: 20px;
+}
+
+.text {
+	width: 60%;
+	color: #fff;
+	margin-left: 70px;
+	margin-top: 30px;
+	font: SourceCodePro-Light;
+	font-size: 16px;
+	line-height: 21px;
+	padding-right: 50px;
+	text-indent: 20px;
+}
+
+/*p:first-child {
+	font-size: 30px;
+}*/
+
+.pulse {
+	border: 1px solid #fff;
+	width: 70px;
+	height: 70px;
+	margin-top: 100px;
+	margin-left: 70px;
+	border-radius: 50%;
+	text-align: center;
+	animation: pulse 1.8s linear infinite;
+	cursor: pointer;
+	font-size: 35px;
+
+}
+
+@keyframes pulse {
+	0%{
+		transform: scale(0.5);
+		opacity: 0;
+	}
+	50%{
+		opacity: 1;
+	}
+	100%{
+		transform: scale(1.2);
+		opacity: 0;
+	}
+}
+
+.phone, .phone a {
+	width: 70px;
+	height: 70px;
+	color: white;
+	margin-top: 13px;
+}
+
+#portfo {
+	width: 100%;
+	height: 350px;
+	background: url(what-the-hex/what-the-hex.png);
+}
+
+.under {
+	background: url(what-the-hex-dark.png);
+	width: 100%;
+	height: 50px;
+}
+
+.text3, .text3 a {
+	color: white;
+	text-align: center;
+	font-size: 17px;
+	padding: 10px;	
+	text-decoration: none;
+}
+
+#gamebox {
+	height: 260px;
+	width: 260px;
+	margin: 0 auto;
+	border: none;
+	max-width: 100%;
+	padding-top: 30px;
+}
+
+#gamebox>div {
+	width: 33.3%; 
+	height: 33.3%; 
+	/*display: inline-block;*/
+	float: left;
+	border: 1px solid #333;
+	position: relative;
+}
+
+#gamebox div[data-row='0'][data-col='0']{
+	border-top: none;
+	border-left: none;
+}
+
+#gamebox div[data-row='2'][data-col='2']{
+	border-right: none;
+	border-bottom: none;
+}
+
+#gamebox div[data-row='0'][data-col='1']{
+	border-top: none;
+}
+
+#gamebox div[data-row='0'][data-col='2']{
+	border-right: none;
+	border-top: none;
+}
+
+#gamebox div[data-row='1'][data-col='0']{
+	border-left: none;
+}
+
+#gamebox div[data-row='1'][data-col='2']{
+	border-right: none;
+}
+
+#gamebox div[data-row='2'][data-col='0']{
+	border-bottom: none;
+	border-left: none;
+}
+
+#gamebox div[data-row='2'][data-col='1']{
+	border-bottom: none;
+}
+
+.cross::after, .zero::after{
+	margin-top: -30px;
+	position: absolute;
+	top: 50%;
+	left: 0;
+	width: 100%;
+	color: #333;
+	display: block;
+	text-align: center;
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: 60px;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.cross::after{
+	content: "\f00d";
+
+} 
+
+.zero::after{
+	content: "\f10c";
+}
