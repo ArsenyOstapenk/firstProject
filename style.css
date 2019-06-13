@@ -1,8 +1,8 @@
-@import "font-awesome-4.7.0/css/font-awesome.css";
+@import "fonts/font-awesome-4.7.0/css/font-awesome.css";
 
 @font-face {
 	font-family: SourceCodePro-Light;
-	src: url(SourceCodePro-Light.otf);
+	src: url(fonts/SourceCodePro-Light.otf);
 	font-weight: normal;
 	font-style: normal;
 }
@@ -16,10 +16,16 @@
 
 
 .content {
-	background: url(what-the-hex-dark.png);
-	height: 500px;
+	background: url(images/what-the-hex-dark.png);
+	min-height: 100vh;
+	padding-bottom: 50px;
 	width: 100%;
 	margin-top: 0;
+}
+
+.main {
+	max-width: 1200px;
+	margin: 0 auto;
 }
 
 .photo {
@@ -48,22 +54,22 @@
 	margin-top: 30px;
 	font: SourceCodePro-Light;
 	font-size: 16px;
-	line-height: 21px;
+	line-height: 24px;
 	padding-right: 50px;
-	text-indent: 20px;
 }
 
 .pulse {
 	border: 1px solid #fff;
 	width: 70px;
 	height: 70px;
-	margin-top: 100px;
+	margin-top: 70px;
 	margin-left: 70px;
 	border-radius: 50%;
 	text-align: center;
 	animation: pulse 1.8s linear infinite;
 	cursor: pointer;
 	font-size: 35px;
+	margin-bottom: 20px;
 
 }
 
@@ -90,21 +96,26 @@
 
 #portfo {
 	width: 100%;
-	background: url(what-the-hex/what-the-hex.png);
+	background: url(images/what-the-hex.png);
+	padding: 30px 0;
 }
 
-.under {
-	background: url(what-the-hex-dark.png);
+footer {
+	background: url(images/what-the-hex-dark.png);
 	width: 100%;
 	height: 50px;
+	margin-top: -50px;
+	text-align: center;
 }
 
-.text3, .text3 a {
+footer a {
 	color: white;
 	text-align: center;
 	font-size: 17px;
 	padding: 10px;	
 	text-decoration: none;
+	white-space: nowrap;
+	display: inline-block;
 }
 
 #gamebox {
@@ -122,6 +133,12 @@
 	float: left;
 	border: 1px solid #333;
 	position: relative;
+}
+
+#gamebox:after {
+	content: " ";
+	clear: both;
+	display: table;
 }
 
 #gamebox div[data-row='0'][data-col='0']{
@@ -189,14 +206,21 @@
 #message {
 	font-size: 30px;
 	text-align: center;
-	margin-top: 15px;
 }
 
 #new-game {
 	margin:10px auto;
 	display: block;
-	padding: 5px;
-	background: radial-gradient(rgba(0,0,0,0),rgba(0,0,0,0));
+	padding: 8px 20px;
+	background: transparent;
 	border: 1px solid #333;
 	color: #333;
+	margin-top: 20px;
+	letter-spacing: 0.5px;
+	transition: all 300ms ease-in-out;
+}
+
+#new-game:hover{
+	background: #333;
+	color: #fff;
 }

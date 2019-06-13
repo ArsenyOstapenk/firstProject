@@ -1,17 +1,15 @@
-class Game {
-	constructor({gameBoxId, newGameBtnId, messageBoxId, computerStepTimeout}) {
-		console.log(gameBoxId, newGameBtnId);
-		this.gamebox=document.getElementById(gameBoxId);
-		this.newGamebtn=document.getElementById(newGameBtnId);
-		this.messageBox=document.getElementById(messageBoxId);
-		this.computerStepTimeout=computerStepTimeout;
+function Game (props) {
+	this.gamebox=document.getElementById(props.gameBoxId);
+	this.newGamebtn=document.getElementById(props.newGameBtnId);
+	this.messageBox=document.getElementById(props.messageBoxId);
+	this.computerStepTimeout=props.computerStepTimeout;
 
-		this.newGamebtn.onclick=this.initialize;
-		this.gamebox.onclick=this.gameboxClick;
+	this.newGamebtn.onclick=this.initialize.bind(this);
+	this.gamebox.onclick=this.gameboxClick.bind(this);
+}
 
-	}
-
-	initialize = ()=>{
+Game.prototype={
+	initialize: function () {
  		this.gamebox.innerHTML='';
 		this.none = [];
 		this.cross = [];
@@ -30,33 +28,40 @@ class Game {
 		}
 
 		this.showMessage('Ваш ход');
- 	}
+ 	},
 
- 	showMessage = (message)=>{
+ 	showMessage: function (message) {
  		this.messageBox.innerHTML=message;
- 	}
+ 	},
 
- 	getRandomInt=(min, max)=>{
+ 	getRandomInt: function(min, max) {
 		if(min<=max){
 			return Math.floor(Math.random() * (max - min + 1)) + min;
 		}
 		else{
 			return null;
 		}	
-	}
+	},
 
-
-	doStep=(arrayName, noneIndex, domElement)=>{
+	doStep: function (arrayName, noneIndex, domElement) {
 		var array = arrayName == 'cross' ? this.cross : this.zero;
 		array.push(this.none[noneIndex]);
 		this.none.splice(noneIndex, 1);
 		domElement.className = arrayName;
+		if(this.checkWinner(array)){
+			this.showMessage(arrayName=='cross'?'Поздравляем, Вы победили!':'Вы проиграли :(');
+			return false;
+		}
+
 		if(!this.none.length) {
 			this.showMessage('Ничья!');
+			return false;
 		}
-	}
+
+		return true;
+	},
  
- 	checkWinner=(array)=>{
+ 	checkWinner: function(array) {
  		var result = array.reduce(function(acc, item){
  			acc['col'+item.col]++;
  			acc['row'+item.row]++;
@@ -81,9 +86,9 @@ class Game {
  		return Object.values(result).some(function(item){
  			return item > 2;				
  		}); 
- 	}
+ 	},
 
- 	gameboxClick=(event)=>{
+ 	gameboxClick: function (event) {
 		if (this.isBlock) {
 			return;
 		}
@@ -107,34 +112,26 @@ class Game {
 		}
 
 
-		this.doStep('cross', index, element);
-		if(this.checkWinner(this.cross)){
-			this.showMessage('Поздравляем, Вы победили!');
-			return;
+		if (this.doStep('cross', index, element) ) {
+			this.doComputerStep();
 		}
+ 	},
 
-		this.doComputerStep();
-
- 	}
-
- 	doComputerStep=()=>{
+ 	doComputerStep: function() {
  		this.isBlock=true;
  		this.showMessage('<i class="fa fa-spinner fa-pulse fa-fw"></i>');
+ 		var that=this;
 
- 		setTimeout (()=>{
-			var indexRandom = this.getRandomInt(0, this.none.length-1);
+ 		setTimeout ( function () {
+			var indexRandom = that.getRandomInt(0, that.none.length-1);
 			if(indexRandom===null){
 				return;
 			}
-			var computerElement = this.gamebox.querySelector("div[data-row='" + this.none[indexRandom].row + "'][data-col='" + this.none[indexRandom].col + "']");
-			this.doStep('zero', indexRandom, computerElement);
-			if(this.checkWinner(this.zero)){
-				this.showMessage('Вы проиграли :(');
-				return;
-			}	
-			this.isBlock=false;
-			this.showMessage('Ваш ход');
-
+			var computerElement = that.gamebox.querySelector("div[data-row='" + that.none[indexRandom].row + "'][data-col='" + that.none[indexRandom].col + "']");
+			if (that.doStep('zero', indexRandom, computerElement)) {
+				that.isBlock=false;
+				that.showMessage('Ваш ход');
+			}
 		}, this.computerStepTimeout);
  	}
 }
