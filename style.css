@@ -25,6 +25,7 @@
 .photo {
 	width: 250px;
 	height: 250px;
+	border: 2px solid white;
 	border-radius: 50%;
 	display: block;
 	margin-top: 0px;
